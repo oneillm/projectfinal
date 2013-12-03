@@ -1,7 +1,6 @@
 <%= javascript_include_tag "jquery_ujs" %>
 
 <p id="notice"><%= notice %></p>
-
 <p>
   <strong>Appliance:</strong>
   <%=h @servicerequest.appliance %>
@@ -64,7 +63,9 @@
            <b>Bid Amount:</b><%=h bid.bidamt %>
            <b>Provider Comment:</b><%=h bid.comment %>
           <% if user_signed_in? %>
-              <%= link_to "Select this provider", servicerequest_path(:servicerequest => {:provider_id => bid.provider_id, :status => 'Accepted'}), :method => :patch, :confirm => "Are you sure you want this provider?" %>
+              <% if !@servicerequest.provider_id %>
+                    <%= link_to "Select this provider", servicerequest_path(:servicerequest => {:provider_id => bid.provider_id, :status => 'Accepted'}), :method => :patch, :confirm => "Are you sure you want this provider?" %>
+              <% end %>
           <% end %>
        </li>
      <% end %>

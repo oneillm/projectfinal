@@ -46,9 +46,17 @@
         <td><%= servicerequest.status %></td>
         <td><%= "#{servicerequest.provider_id == current_provider.id ? 'me' : servicerequest.provider_id}" %></td>
        </tr>
-    <% end %>
+   <% if current_provider.id == servicerequest.provider_id %>
+       <tr><td></td><td></td>
+               <% @usercontact = User.find_by_id( servicerequest.user_id) %>
+                   <td>Customer Name: <%= @usercontact.username %></td>
+                  <td> Customer Email: <%= @usercontact.email %></td>
+                  <td> Customer Phone: <%= @usercontact.phone %></td>
+      </tr>
+   <% end %>
+  <% end %>
   </tbody>
 </table>
 <% else %>
-    No Service List.
+    No Services Render.
 <% end %>

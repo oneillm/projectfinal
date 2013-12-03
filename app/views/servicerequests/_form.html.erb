@@ -19,38 +19,71 @@
 </div> 
   <div class="field">
     <%= f.label :Appliance %>
-    <%= f.text_field :appliance, :readonly => provider_signed_in? %>
+    <% if f.object.status != 'Accepted' %>
+       <%= f.text_field :appliance, :readonly => provider_signed_in? %>
+    <% else %>
+        <%= f.text_field :appliance, :readonly => true %>
+    <% end %>
   </div>
   <div class="field">
     <%= f.label :Brand %>
-    <%= f.text_field :brand, :readonly => provider_signed_in? %>
+    <% if f.object.status != 'Accepted' %>
+        <%= f.text_field :brand, :readonly => provider_signed_in? %>
+    <% else %>
+        <%= f.text_field :brand, :readonly => true %>
+    <% end %>
   </div>
   <div class="field">
     <%= f.label :Warranty %>
-    <%= f.text_field :warranty, :readonly => provider_signed_in? %>
-  </div>
+    <% if f.object.status != 'Accepted' %>
+       <%= f.text_field :warranty, :readonly => provider_signed_in? %>
+    <% else %>
+       <%= f.text_field :warranty, :readonly => true %>
+    <% end %> 
+ </div>
   <div class="field">
     <%= f.label :ProblemDescription %>
-    <%= f.text_field :problem_desc, :readonly => provider_signed_in? %>
-  </div>
+    <% if f.object.status != 'Accepted' %>
+       <%= f.text_field :problem_desc, :readonly => provider_signed_in? %>
+    <% else %>
+       <%= f.text_field :problem_desc, :readonly => true %>
+    <% end %> 
+ </div>
   <div class="field">
     <%= f.label :Service_Center_Location %>
-    <%= f.text_field :service_ctr_location, :readonly => provider_signed_in? %>
-  </div>
+    <% if f.object.status != 'Accepted' %>
+     <%= f.text_field :service_ctr_location, :readonly => provider_signed_in? %>
+    <% else %>
+     <%= f.text_field :service_ctr_location, :readonly => true %>
+    <% end %>
+</div>
   <div class="field" id="datetimepicker1">
     <%= f.label :ServiceByDate %>
-    <%= f.text_field :service_by, :readonly => provider_signed_in? %>
-  </div>
+    <% if f.object.status != 'Accepted' %>
+        <%= f.text_field :service_by, :readonly => provider_signed_in? %>
+    <% else %>
+        <%= f.text_field :service_by, :readonly => true %>
+    <% end %>
+    
+   </div>
   <div class="field">
     <%= f.label :Bid_EndDte %>
-    <%= f.text_field :bidend, :readonly => provider_signed_in? %>
+    <% if f.object.status != 'Accepted' %>
+      <%= f.text_field :bidend, :readonly => provider_signed_in? %>
+    <% else %> 
+      <%= f.text_field :bidend, :readonly => true %>
+    <% end %>
   </div>
   <div class="field">
     <%= f.label :status %>
     <% if f.object.new_record? %>
     <%= f.text_field :status, :value => 'Open'  %>
     <% else %>
-    <%= f.text_field :status, :readonly => provider_signed_in? %>
+        <% if f.object.status != 'Accepted' %>
+           <%= f.text_field :status, :readonly => provider_signed_in? %>
+        <% else %>
+           <%= f.text_field :status, :readonly => true %>
+        <% end %>
     <% end %>
   </div>
 <% if !f.object.new_record? %>
@@ -58,7 +91,7 @@
       <%= render 'bid_fields', :f => bidinfo %><br />
   <% end %>  
 <% end %>
-<% if provider_signed_in? %>
+<% if provider_signed_in? && f.object.status !='Accepted' %>
        <p>      <%= link_to_add_fields "Add Bid", f, :bids %>
       </p>
 <% end %>
