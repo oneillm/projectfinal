@@ -42,7 +42,11 @@
         <% end %>
         <td><%= link_to 'Show', servicerequest %></td>
         <% if user_signed_in? %>
-        <td><%= link_to 'Edit', edit_servicerequest_path(servicerequest) %></td>
+          <td>
+           <% if servicerequest.status != 'Accepted' %>
+              <%= link_to 'Edit', edit_servicerequest_path(servicerequest) %>
+           <% end %>
+          </td>
         <td><%= link_to 'Destroy', servicerequest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         
         <% else %>
